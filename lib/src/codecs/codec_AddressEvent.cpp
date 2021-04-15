@@ -17,6 +17,9 @@
  */
 
 #include <yarp/os/Bottle.h>
+#ifdef WIN32
+#define EXPORT //warning, positional define. This should be define before including the vCodec.h
+#endif
 #include "event-driven/vCodec.h"
 
 #if defined CODEC_128x128

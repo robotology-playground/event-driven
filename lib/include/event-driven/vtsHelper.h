@@ -21,6 +21,7 @@
 #define __VTSHELPER__
 
 #include <yarp/os/all.h>
+#include <event-driven/api.h>
 #include <fstream>
 #include <math.h>
 #include <vector>
@@ -28,7 +29,7 @@
 namespace ev {
 
 /// \brief helper class to deal with timestamp conversion and wrapping
-class vtsHelper {
+class EV_API vtsHelper {
 
 private:
 

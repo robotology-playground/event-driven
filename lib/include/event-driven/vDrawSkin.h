@@ -994,7 +994,7 @@ public:
 
 };
 
-class isoDrawSkin : public isoDraw {
+class EV_API isoDrawSkin : public isoDraw {
 
 private:
 
@@ -1026,7 +1026,7 @@ public:
 
 
 
-class skinDraw : public vDraw {
+class EV_API skinDraw : public vDraw {
 
 private:
 
@@ -1077,7 +1077,7 @@ public:
 
 };
 
-class skinsampleDraw : public vDraw {
+class EV_API skinsampleDraw : public vDraw {
 
 
 private:
@@ -1127,7 +1127,7 @@ public:
 };
 
 
-class taxelsampleDraw : public vDraw {
+class EV_API taxelsampleDraw : public vDraw {
 
 public:
     void resetImage(cv::Mat &image){
@@ -1149,7 +1149,7 @@ public:
 
 };
 
-class taxeleventDraw : public vDraw {
+class EV_API taxeleventDraw : public vDraw {
 
 public:
     virtual void resetImage(cv::Mat &image){

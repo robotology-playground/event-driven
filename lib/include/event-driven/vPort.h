@@ -18,7 +18,9 @@
 
 #ifndef __VGENPORT__
 #define __VGENPORT__
-
+#if WIN32
+#define SCHED_FIFO 8
+#endif
 #include <vector>
 #include <yarp/os/all.h>
 #include <mutex>

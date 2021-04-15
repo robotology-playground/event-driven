@@ -22,6 +22,7 @@
 #ifndef __vDraw__
 #define __vDraw__
 
+#include <event-driven/api.h>
 #include <event-driven/all.h>
 #include <string>
 #include <opencv2/opencv.hpp>
@@ -113,7 +114,7 @@ public:
 
 };
 
-class isoDraw : public vDraw {
+class EV_API isoDraw : public vDraw {
 
 protected:
 
@@ -158,7 +159,7 @@ public:
 
 };
 
-class addressDraw : public vDraw {
+class EV_API addressDraw : public vDraw {
 
 public:
 
@@ -169,7 +170,7 @@ public:
 
 };
 
-class imuDraw : public vDraw {
+class EV_API imuDraw : public vDraw {
 
 public:
 
@@ -180,7 +181,7 @@ public:
 
 };
 
-class rasterDraw : public vDraw {
+class EV_API rasterDraw : public vDraw {
 
 protected:
 
@@ -205,7 +206,7 @@ public:
 
 };
 
-class cochleaDraw : public vDraw {
+class EV_API cochleaDraw : public vDraw {
 
 public:
 
@@ -216,7 +217,7 @@ public:
 
 };
 
-class flowDraw : public vDraw {
+class EV_API flowDraw : public vDraw {
 
 public:
 
@@ -227,7 +228,7 @@ public:
 
 };
 
-class interestDraw : public vDraw {
+class EV_API interestDraw : public vDraw {
 
 public:
 
@@ -238,7 +239,7 @@ public:
 
 };
 
-class clusterDraw : public vDraw {
+class EV_API clusterDraw : public vDraw {
 
 protected:
 
@@ -254,7 +255,7 @@ public:
 
 };
 
-class isoInterestDraw : public isoDraw {
+class EV_API isoInterestDraw : public isoDraw {
 
 public:
 

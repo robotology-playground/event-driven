@@ -19,6 +19,9 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+#ifdef WIN32
+#define EXPORT //warning, positional define. This should be define before including the vDraw.h
+#endif
 #include "event-driven/vDraw.h"
 
 namespace ev {

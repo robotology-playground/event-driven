@@ -1,0 +1,32 @@
+<application>
+    <name>IMUCalibDumper</name>
+    <description>Dump IMU data for calibration</description>
+    <version>1.0</version>
+
+<!--MODULES-->
+<module>
+    <name>vPreProcess</name>
+    <parameters> --width 304 --height 240 --split_stereo true --undistort false --filter_spatial true --filter_temporal true</parameters>
+    <node>localhost</node>
+</module>
+
+<module>
+   <name>IMUCalibDumper</name>
+   <parameters></parameters>
+   <node>localhost</node>
+</module>
+
+<!--CONNECTIONS-->
+<connection>
+  <from>/zynqGrabber/AE:o</from>
+  <to>/vPreProcess/AE:i</to>
+  <protocol> fast_tcp </protocol>
+</connection>
+
+<connection>
+  <from>/vPreProcess/imu_samples:o</from>
+  <to>/IMUCalibDumper/IMU:i</to>
+  <protocol>fast_tcp</protocol>
+</connection>
+
+</application>

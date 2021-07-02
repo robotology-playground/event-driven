@@ -1,0 +1,80 @@
+<application>
+
+    <name>stereoCalib</name>
+    <description>Description</description>
+    <version>1.0</version>
+ 
+    <module>
+      <name>stereoCalib</name>
+      <parameters> --from ~/.local/share/yarp/contexts/cameraCalibration/stereoCalib.ini </parameters>
+      <node>localhost</node>
+    </module>
+
+    <module>
+      <name>yarpdev</name>
+          <parameters> --from /usr/local/src/robot/librealsense/RealSense_conf.ini </parameters>
+      <node>localhost</node>
+    </module>
+ 
+    <module>
+        <name> vPreProcess </name>
+        <parameters> --filter_temporal false --filter_spatial false --split_stereo </parameters>
+        <node> localhost </node>
+    </module>
+
+    <module>
+        <name> vFramerLite </name>
+        <parameters> --displays "(/right (BLACK))" --frameRate 30 --eventWindow 0.034 </parameters>
+        <node>localhost</node>
+    </module>
+
+    <module>
+      <name>yarpview</name>
+      <parameters> --name /view/leftCalib:i --x 567 --y 490 --w 500 --h 400 --synch </parameters>
+      <node>localhost</node>
+    </module>
+
+    <module>
+      <name>yarpview</name>
+      <parameters> --name /view/rightCalib:i --x 567 --y 1060 --w 500 --h 400 --synch </parameters>
+      <node>localhost</node>
+    </module>
+
+    <connection>
+      <from>/depthCamera/rgbImage:o</from>
+      <to>/stereoCalib/cam/left:i</to>
+      <protocol>fast_tcp</protocol>
+    </connection>
+
+    <connection>
+      <from>/stereoCalib/cam/left:o</from>
+      <to>/view/leftCalib:i</to>
+      <protocol>fast_tcp</protocol>
+    </connection>
+
+    <connection>
+      <from>/zynqGrabber/AE:o</from>
+      <to> /vPreProcess/AE:i</to>
+      <protocol>fast_tcp</protocol>
+    </connection>
+
+    <connection>
+      <from>/vPreProcess/right:o</from>
+      <to> /vFramer/right/AE:i</to>
+      <protocol>fast_tcp</protocol>
+    </connection>
+
+     <connection>
+      <from>/vFramer/right/image:o</from>
+      <to>/stereoCalib/cam/right:i</to>
+      <protocol>fast_tcp</protocol>
+    </connection>
+
+     <connection>
+      <from>/stereoCalib/cam/right:o</from>
+      <to>/view/rightCalib:i</to>
+      <protocol>fast_tcp</protocol>
+    </connection>
+
+</application>
+

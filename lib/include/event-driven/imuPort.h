@@ -16,19 +16,19 @@ class imuPort : public Thread {
     private: 
         vReadPort< vector<IMUevent>  > imu_port;
         array<double, 10> imu_state;
-        imuHelper imu_helper;
 
         cv::Mat calib_acc, calib_gyr;
-        double g_mag;        
+        bool calibrate;
 
+        // calibration parameters
         cv::Mat acc_missalign, gyr_missalign;
         cv::Mat acc_scale, acc_bias, gyr_scale, gyr_bias;
     public:
    
     enum
     {
-        ACC_Y = 0, ACC_X = 1, ACC_Z = 2,
-        GYR_Y = 3, GYR_X = 4, GYR_Z = 5,
+        ACC_X = 0, ACC_Y = 1, ACC_Z = 2,
+        GYR_X = 3, GYR_Y = 4, GYR_Z = 5,
         TEMP  = 6,
         MAG_Y = 7, MAG_X = 8, MAG_Z = 9
     };

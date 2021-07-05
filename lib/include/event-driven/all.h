@@ -3,3 +3,4 @@
 #include "event-driven/vPort.h"
 #include "event-driven/vFilters.h"
 #include "event-driven/vCollectSend.h"
+#include "event-driven/imuPort.h"

@@ -35,7 +35,8 @@ if(OpenCV_FOUND)
     list(APPEND folder_source src/vIPT.cpp
                               src/vDraw_basic.cpp
                               src/vDraw_ISO.cpp
-                              src/vDraw_skin.cpp)
+                              src/vDraw_skin.cpp
+                              src/imuPort.cpp)
 endif()
 
 if(VLIB_DEPRECATED)
@@ -51,6 +52,7 @@ set(folder_header
   include/event-driven/vPort.h
   include/event-driven/vCollectSend.h
   include/event-driven/all.h
+  include/event-driven/imuPort.h
 )
 
 if(OpenCV_FOUND)

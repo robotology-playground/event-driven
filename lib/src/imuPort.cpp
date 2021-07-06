@@ -8,7 +8,7 @@ bool imuPort::configure(yarp::os::ResourceFinder& rf, string name)
         return false;
     }
     
-    calibrate = rf.check("calibrate", Value(false)).asBool();
+    std::string calibrate = rf.check("calibrate", Value(std::string("raw"))).asString();
 
     double g_mag = rf.check("g_mag", Value(9.805622)).asDouble();
     double conversion_rate = rf.check("g_mag", Value(16384.0)).asDouble();
@@ -36,7 +36,7 @@ bool imuPort::configure(yarp::os::ResourceFinder& rf, string name)
     gyr_bias = (cv::Mat_<double>(3,1) << 0, 0, 0);
 
 
-    if(calibrate)
+    if(calibrate.compare("calibrate"))
     {
         std::string home = std::string(std::getenv("HOME"));
         std::string acc_file_name = rf.check("acc_calib_params", yarp::os::Value(home+std::string("/acc.calib"))).asString();
@@ -44,12 +44,15 @@ bool imuPort::configure(yarp::os::ResourceFinder& rf, string name)
         
         std::ifstream acc_calib_params(acc_file_name);
         std::ifstream gyr_calib_params(gyr_file_name);
+
+        // check if the files are opened
         if(!acc_calib_params.is_open() || !gyr_calib_params.is_open())
         {
             yInfo() << "Files with calibration parameters not found. Specify with '--acc_calib_params <file>' and 'gyr_calib_params <file>'";
             return false;
         }
 
+        // read from the files
         for(auto v = acc_missalign.begin<double>(); v!= acc_missalign.end<double>(); ++v)
         {
             acc_calib_params >> *v;
@@ -85,11 +88,20 @@ bool imuPort::configure(yarp::os::ResourceFinder& rf, string name)
             gyr_calib_params >> *v;
         }
         //std::cout << "gyr_bias: \n" << gyr_bias << "\n";
+        yInfo() << "Calibrated IMU data\n";
     }
-    else // just convert to SI
+    else if(calibrate.compare("SI")) // just convert to SI
     {
         acc_scale = acc_scale * g_mag/conversion_rate;
         gyr_scale = gyr_scale * (gyr_rate * M_PI / (2.0 * 180.0 * conversion_rate));
+        yInfo() << "IMU data in SI units\n";
+    }
+    else if(calibrate.compare("raw"))
+    {
+        yInfo() << "IMU raw data\n";
+    }
+    else{
+        yInfo() << "IMU raw data\n";
     }
     
     yInfo() << "IMU Port configured";

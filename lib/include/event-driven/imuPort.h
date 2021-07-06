@@ -18,7 +18,6 @@ class imuPort : public Thread {
         array<double, 10> imu_state;
 
         cv::Mat calib_acc, calib_gyr;
-        bool calibrate;
 
         // calibration parameters
         cv::Mat acc_missalign, gyr_missalign;
